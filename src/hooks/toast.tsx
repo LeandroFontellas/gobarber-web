@@ -31,12 +31,12 @@ const ToastProvider: React.FC = ({ children }) => {
         description,
       };
 
-      setMessages([...messages, toast]);
+      // setMessages([...messages, toast]);
       // alternativa:
-      // setMessages((oldMessages)=>[...oldMessages, toast]);
+      setMessages(oldMessages => [...oldMessages, toast]);
       // ai dps tira o messages do array de dependencias
     },
-    [messages],
+    [],
   );
 
   const removeToast = useCallback((id: string) => {
