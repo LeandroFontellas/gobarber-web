@@ -14,11 +14,17 @@ import { Container, Error } from './styles';
 // InputHTMLAttributes é tudo o que o input ja tem por padrao no html
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
+  containerStyle?: React.CSSProperties;
   icon?: React.ComponentType<IconBaseProps>;
 }
 // quando vc coloca o inputprops entre setas ele a partir dai vai comecar a esperar esses
 // parametros nesse componente
-const Input: React.FC<InputProps> = ({ name, icon: Icon, ...restProps }) => {
+const Input: React.FC<InputProps> = ({
+  name,
+  icon: Icon,
+  containerStyle = {},
+  ...restProps
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -52,6 +58,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...restProps }) => {
     <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
       {!!Icon && <Icon size={20} />}
       <input
+        style={containerStyle}
         onBlur={handleInputBlur}
         onFocus={handleOnFocus}
         defaultValue={defaultValue}
